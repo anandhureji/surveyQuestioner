@@ -50,6 +50,18 @@ public class SurveyResource {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return question;
     }
+    @DeleteMapping("/surveys/{surveyId}/questions/{questionId}")
+    public ResponseEntity<Object> DeleteSpecificQuestion(@PathVariable String surveyId, @PathVariable String questionId){
+       surveyService.deleteSurveyQuestion(surveyId,questionId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/surveys/{surveyId}/questions/{questionId}")
+    public ResponseEntity<Object> UpdateSpecificQuestion(@PathVariable String surveyId, @PathVariable String questionId,@RequestBody Question question){
+        surveyService.updateSurveyQuestion(surveyId,questionId,question);
+        return ResponseEntity.noContent().build();
+    }
+
 
     @PostMapping("/surveys/{surveyId}")
     public ResponseEntity<Object> addNewSurveyQuestion(@PathVariable String surveyId, @RequestBody Question question){
